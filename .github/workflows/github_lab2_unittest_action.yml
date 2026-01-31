@@ -1,4 +1,4 @@
-name: Testing Github Lab1 Python Unittests
+name: Python Unittests
 
 on:
   push:
@@ -11,19 +11,18 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v2
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v2
       with:
         python-version: 3.8
 
     - name: Install dependencies
-      run: pip install -r Labs/Github_Labs/Lab1/requirements.txt
+      run: pip install -r requirements.txt
 
     - name: Run unittests
-      run: python -m unittest Labs/Github_Labs/Lab1/test/test_unittest.py
-
+      run: python -m unittest test.test_unittest
 
     - name: Notify on success
       if: success()

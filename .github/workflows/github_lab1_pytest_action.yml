@@ -24,13 +24,5 @@ jobs:
 
       - name: Run tests
         run: |
-          cd $GITHUB_WORKSPACE
-          python -m pytest test/test_pytest.py -v
-
-      - name: Notify on success
-        if: success()
-        run: echo "Tests passed successfully"
-
-      - name: Notify on failure
-        if: failure()
-        run: echo "Tests failed"
+          export PYTHONPATH="${PYTHONPATH}:${GITHUB_WORKSPACE}"
+          pytest test/test_pytest.py -v

@@ -17,12 +17,18 @@ jobs:
         with:
           python-version: '3.8'
 
-      - name: Install dependencies
-        run: |
-          pip install pytest
-          pip install -r requirements.txt
+      - name: Install pytest
+        run: pip install pytest
 
       - name: Run tests
         run: |
           export PYTHONPATH="${PYTHONPATH}:${GITHUB_WORKSPACE}"
           pytest test/test_pytest.py -v
+
+      - name: Notify on success
+        if: success()
+        run: echo "Tests passed successfully"
+
+      - name: Notify on failure
+        if: failure()
+        run: echo "Tests failed"
